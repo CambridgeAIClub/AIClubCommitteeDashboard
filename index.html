@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI Club Committee Dashboard</title>
+  <meta name="description" content="Rota sign-ups, team actions and contacts for the Cambridge AI Club committee.">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body class="locked">
+  <div id="gate" class="gate">
+    <form id="gate-form" class="gate-card" autocomplete="on">
+      <img class="gate-logo" src="assets/logo.png" alt="Cambridge AI Club for Biomedicine">
+      <h1>AI Club Committee</h1>
+      <p class="muted">This dashboard is for committee members. Enter the password to continue.</p>
+      <input type="text" name="username" value="AI Club committee" autocomplete="username" hidden>
+      <input id="gate-pw" type="password" placeholder="Password" autocomplete="current-password" required autofocus>
+      <label class="remember"><input id="gate-remember" type="checkbox" checked> Remember on this device</label>
+      <button class="btn" type="submit" id="gate-btn">Unlock</button>
+      <div id="gate-err" class="gate-err" role="alert"></div>
+    </form>
+  </div>
+
+  <header class="top">
+    <div class="wrap top-inner">
+      <a class="brand" href="#schedule">
+        <span class="logo"><img src="assets/logo-mark.png" alt=""></span>
+        <span><b>Cambridge AI Club</b><small>Committee Dashboard</small></span>
+      </a>
+      <nav>
+        <a href="#schedule" data-tab="schedule">Schedule</a>
+        <a href="#speakers" data-tab="speakers">Speakers</a>
+        <a href="#rota" data-tab="rota">Rota</a>
+        <a href="#me" data-tab="me">My view</a>
+        <a href="#committee" data-tab="committee">Committee</a>
+        <a href="#meeting" data-tab="meeting">Next Meeting</a>
+        <a href="#actions" data-tab="actions">Team actions</a>
+        <a href="#guidelines" data-tab="guidelines">Guidelines</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="wrap bar-links">
+    <span id="status" class="status">Loading rota…</span>
+    <span class="links">
+      <button id="refresh" class="link-btn" title="Reload the rota from Google Sheets">↻ Refresh</button>
+      <a id="rota-link" target="_blank" rel="noopener">Rota sheet ↗</a>
+      <a id="tracker-link" target="_blank" rel="noopener">Speaker tracker ↗</a>
+      <button id="lock" class="link-btn" title="Lock the dashboard on this device">🔒 Lock</button>
+    </span>
+  </div>
+
+  <main class="wrap">
+    <div id="view-schedule" class="view"></div>
+    <div id="view-speakers" class="view"></div>
+    <div id="view-rota" class="view"></div>
+    <div id="view-me" class="view"></div>
+    <div id="view-committee" class="view"></div>
+    <div id="view-meeting" class="view"></div>
+    <div id="view-actions" class="view"></div>
+    <div id="view-guidelines" class="view"></div>
+  </main>
+
+  <footer class="wrap foot">
+    Cambridge AI Club committee · Rota data is read live from the AI Club Rota Google Sheet; sign up there.
+  </footer>
+
+  <script src="assets/secure.js"></script>
+  <script src="assets/gate.js"></script>
+</body>
+</html>
