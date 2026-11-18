@@ -656,3 +656,16 @@ select.pick.tiny { width: auto; max-width: 110px; padding: 1px 4px; font-size: .
 select.pick.tiny:hover { border-style: solid; }
 .c-cant select.pick.tiny { border-color: #fca5a5; color: #b91c1c; background: #fef2f2; }
 table.rc .x-btn { font-size: .8rem; }
+
+/* inline (fold-down) details under a strip */
+.inline-detail { --c: #4338ca; position: relative; margin: -12px 4px 4px; padding: 20px 18px 16px; background: var(--card);
+  border: 1px solid color-mix(in srgb, var(--c) 35%, var(--line)); border-top: 0; border-left: 5px solid var(--c);
+  border-radius: 0 0 14px 14px; box-shadow: 0 8px 18px color-mix(in srgb, var(--c) 14%, transparent); animation: fold .18s ease; }
+@keyframes fold { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+.inline-detail .close { position: absolute; top: 14px; right: 12px; width: 30px; height: 30px; border-radius: 50%; border: 1px solid var(--line); background: var(--card); color: var(--ink); font-size: 1.1rem; cursor: pointer; }
+.inline-detail .ptag { background: var(--c); }
+.inline-detail h4 { font-size: .74rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin: 16px 0 6px; }
+.inline-detail .slots-d { grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); }
+.inline-detail .sp-d li { border-left-color: var(--c); }
+.strip.sel { border-radius: 12px 12px 4px 4px; outline: none; }
+@media (max-width: 560px) { .inline-detail { margin: -12px 0 4px; padding: 18px 12px 14px; } .inline-detail .slots-d { grid-template-columns: 1fr; } }
