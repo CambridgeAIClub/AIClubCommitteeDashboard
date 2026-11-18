@@ -652,3 +652,7 @@ select.pick:disabled { opacity: .6; cursor: wait; }
 .meet-grid { align-items: start; }
 .btn.ghost-btn, .btn.ghost-btn:hover { background: var(--card); color: #4338ca; border: 1.5px solid #c7d2fe; filter: none; }
 .btn.ghost-btn:hover { background: #eef2ff; }
+select.pick.tiny { width: auto; max-width: 110px; padding: 1px 4px; font-size: .72rem; font-weight: 700; border-radius: 6px; border: 1.5px dashed #f59e0b; color: #b45309; background: #fffbeb; cursor: pointer; }
+select.pick.tiny:hover { border-style: solid; }
+.c-cant select.pick.tiny { border-color: #fca5a5; color: #b91c1c; background: #fef2f2; }
+table.rc .x-btn { font-size: .8rem; }
