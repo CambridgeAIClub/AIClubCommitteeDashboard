@@ -1,5 +1,7 @@
 # AI Club Committee Dashboard
 
+**Live site: https://cambridgeaiclub.github.io/AIClubCommitteeDashboard/** (password protected; ask the co-chairs for the password)
+
 A one-page site for the Cambridge AI Club committee. It has these tabs:
 
 - **Schedule** (the start page): the 2026–27 programme, with themes, speakers and who owns each event's speakers.
