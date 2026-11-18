@@ -669,3 +669,4 @@ table.rc .x-btn { font-size: .8rem; }
 .inline-detail .sp-d li { border-left-color: var(--c); }
 .strip.sel { border-radius: 12px 12px 4px 4px; outline: none; }
 @media (max-width: 560px) { .inline-detail { margin: -12px 0 4px; padding: 18px 12px 14px; } .inline-detail .slots-d { grid-template-columns: 1fr; } }
+.people li { grid-template-columns: 38px 1fr; }
