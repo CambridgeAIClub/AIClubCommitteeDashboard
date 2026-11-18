@@ -47,7 +47,6 @@
     try {
       const key = await deriveKey($("gate-pw").value);
       const code = await decryptWith(key);
-      if ($("gate-remember").checked) save({ salt: E.salt, key: toB64(await crypto.subtle.exportKey("raw", key)) });
       run(code);
     } catch (e) {
       err.textContent = "Incorrect password.";
@@ -62,7 +61,7 @@
       $("gate-err").textContent = "This browser can’t unlock the page. Please open it over https in an up-to-date browser.";
       return;
     }
-    if (await tryRemembered()) return;
+    save(null);   // always ask for the password: forget any unlock saved by older versions
     $("gate-form").addEventListener("submit", unlock);
   });
 })();
