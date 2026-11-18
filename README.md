@@ -2,6 +2,8 @@
 
 **Live site: https://cambridgeaiclub.github.io/AIClubCommitteeDashboard/** (password protected; ask the co-chairs for the password)
 
+> **Maintaining this site?** See the **Website guide** tab inside the dashboard for the full handover (what lives where, keys, setup, routine tasks, troubleshooting). If you use Claude Code, `CLAUDE.md` gives it the same rules.
+
 A one-page site for the Cambridge AI Club committee. It has these tabs:
 
 - **Schedule** (the start page): the 2026–27 programme, with themes, speakers and who owns each event's speakers.
