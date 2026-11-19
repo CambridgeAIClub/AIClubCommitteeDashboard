@@ -20,4 +20,4 @@ A password-protected static site on GitHub Pages for the Cambridge AI Club commi
 - Never commit or print the contents of `src/`, the storage token or the site password. Check `git status` shows no `src/` before committing.
 - After any change to `src/`, rebuild so `assets/secure.js` matches.
 - Keep the rota layout in data.json: row 0 headers (A month, B "Can't make it", C–H roles), row 1 role notes, row 2 "One of: …" requirements, then one row per event like "Dec (Dec 3)". Names are committee first names, comma-separated.
-- The Website guide tab (`MAINT` in `src/data.js`) is the human-facing handover doc. Keep it in sync when the setup changes.
+- The Handover tab (`MAINT` in `src/data.js`) is the human-facing handover doc. Keep it in sync when the setup changes.
