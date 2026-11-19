@@ -10,6 +10,12 @@ A password-protected static site on GitHub Pages for the Cambridge AI Club commi
 - Speaker tracker: Google Sheet read live (gviz CSV). The "Live" tab feeds the Schedule and Speakers tabs; "Potential Speakers" feeds the potential speakers table.
 - Next Meeting: `MEETING` snapshot of a when2meet poll in `src/data.js` (when2meet blocks cross-origin reads).
 
+## Project commands
+- `/setup`: first-time setup (asks for the site password, runs `node unpack.mjs`, checks the storage key and git status).
+- `/publish`: rebuild with the site password, check `src/` isn't staged, commit and push.
+
+When you need the site password, ask the user and pass it as `SITE_PASSWORD='…'` on the command. Never save it to a file.
+
 ## Workflow
 1. Edit `src/data.js` / `src/app.js` (and `assets/style.css` for styling; it's public, so no rebuild is needed for CSS only).
 2. Rebuild: `node build.mjs`. It asks for the site password, or use `SITE_PASSWORD='…' node build.mjs` if the user provides it. It writes `assets/secure.js` and `src.enc`, and refuses a password that doesn't match the current one. Changing the password needs `--new-password`.

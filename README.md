@@ -35,7 +35,7 @@ The dashboard is encrypted. `assets/secure.js` contains only AES-256-GCM ciphert
 
 The readable source (`src/`) isn't committed in plain text. An **encrypted copy, `src.enc`**, is committed instead, locked with the same password. So the whole project lives in this one repository.
 
-- **New maintainer:** clone the repo, run `node unpack.mjs` and enter the site password. `src/` is restored.
+- **New maintainer:** clone the repo, run `claude` in it and type **`/setup`**. Claude asks for the site password and restores `src/`. To do it by hand instead, run `node unpack.mjs`. To make changes later, describe them to Claude, then type **`/publish`**.
 - **After editing `src/`:** run `node build.mjs` (Node 18+, no packages), then commit and push. This updates both `assets/secure.js` and `src.enc`.
 - **Password safety:** `node build.mjs` refuses a password that doesn't match the current one, so a typo can't lock everyone out. To change the password on purpose, run `node build.mjs --new-password`, push, and tell the committee.
 
