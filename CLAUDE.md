@@ -5,14 +5,14 @@ A password-protected static site on GitHub Pages for the Cambridge AI Club commi
 ## Layout
 - `index.html`, `assets/gate.js`, `assets/style.css`, `assets/logo*.png`, `assets/favicon.png`: public shell (password screen, styles).
 - `assets/secure.js`: the dashboard, **encrypted** (AES-256-GCM, PBKDF2) from `src/data.js` + `src/app.js` by `build.mjs`. Never edit by hand.
-- `src/` (**gitignored, private**): `app.js` (all logic), `data.js` (committee, team actions, guidelines, goals, meeting poll snapshot, settings, rota storage key `SITE.store`). If `src/` is missing, ask the user for it. Don't recreate it from scratch.
+- `src/` (**gitignored**): `app.js` (all logic), `data.js` (committee, team actions, guidelines, goals, meeting poll snapshot, settings, rota storage key `SITE.store`). It's stored encrypted in the repo as `src.enc`. If `src/` is missing, ask the user to run `node unpack.mjs` (it needs the site password). Don't recreate it from scratch.
 - Rota data: `data.json` in the private repo `CambridgeAIClub/aiclub-rota-data`, read and written by the browser through the GitHub contents API using `SITE.store.token` (fine-grained, Contents read & write on that repo only).
 - Speaker tracker: Google Sheet read live (gviz CSV). The "Live" tab feeds the Schedule and Speakers tabs; "Potential Speakers" feeds the potential speakers table.
 - Next Meeting: `MEETING` snapshot of a when2meet poll in `src/data.js` (when2meet blocks cross-origin reads).
 
 ## Workflow
 1. Edit `src/data.js` / `src/app.js` (and `assets/style.css` for styling; it's public, so no rebuild is needed for CSS only).
-2. Rebuild: `node build.mjs`. It asks for the site password; or use `SITE_PASSWORD='…' node build.mjs` if the user provides it.
+2. Rebuild: `node build.mjs`. It asks for the site password, or use `SITE_PASSWORD='…' node build.mjs` if the user provides it. It writes `assets/secure.js` and `src.enc`, and refuses a password that doesn't match the current one. Changing the password needs `--new-password`.
 3. Preview: `python3 -m http.server 8000`, then open http://localhost:8000. Sign-ups here write to the real rota.
 4. The user commits and pushes: `git add . && git commit -m "…" && git push`.
 

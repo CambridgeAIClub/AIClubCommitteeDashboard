@@ -29,19 +29,15 @@ One-time setup:
 
 To change the year's events or the role requirements, edit `data.json` directly on GitHub, keeping the same layout. Until step 4 is done, the dashboard falls back to reading the old Google Sheet.
 
-## Password protection
+## Password protection and the source code
 
-The dashboard is encrypted. The published files (`assets/secure.js`) contain only AES-256-GCM ciphertext, so committee names, emails and links can't be read without the password, even from the repository itself. When someone enters the password, the page decrypts it in their browser. "Remember on this device" keeps an unlock key in that browser, and **🔒 Lock** clears it.
+The dashboard is encrypted. `assets/secure.js` contains only AES-256-GCM ciphertext, so committee names, emails and links can't be read without the password, even from this repository. The page decrypts it in the browser when someone enters the password, and it asks every time.
 
-- Readable sources live in `src/`. That folder is in `.gitignore` and is **not pushed**. Keep your copy, for example in OneDrive.
-- After any edit in `src/`, rebuild with Node 18+ (no packages needed):
+The readable source (`src/`) isn't committed in plain text. An **encrypted copy, `src.enc`**, is committed instead, locked with the same password. So the whole project lives in this one repository.
 
-  ```
-  node build.mjs          # prompts for the password
-  ```
-
-  Then commit `assets/secure.js`.
-- To change the password, rebuild with the new one. Saved logins on everyone's devices stop working automatically, and people are asked for the new password.
+- **New maintainer:** clone the repo, run `node unpack.mjs` and enter the site password. `src/` is restored.
+- **After editing `src/`:** run `node build.mjs` (Node 18+, no packages), then commit and push. This updates both `assets/secure.js` and `src.enc`.
+- **Password safety:** `node build.mjs` refuses a password that doesn't match the current one, so a typo can't lock everyone out. To change the password on purpose, run `node build.mjs --new-password`, push, and tell the committee.
 
 ## Editing
 
