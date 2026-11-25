@@ -851,3 +851,15 @@ table.rc .x-btn { font-size: .8rem; }
 .tech .table-wrap { margin-top: 12px; }
 .until-tag { display: inline-block; font-size: .7rem; font-weight: 700; color: #b45309; background: #fef3c7; border-radius: 5px; padding: 0 6px; margin-left: 4px; vertical-align: 1px; }
 .toolbar .btn.small.toolbar-link { margin-top: 0; color: #fff; }
+
+/* add event */
+.add-btn { margin-top: 0 !important; background: linear-gradient(100deg, #16a34a, #0d9488) !important; }
+.sp-add { margin-left: auto; }
+.add-event { border-top: 4px solid #16a34a !important; background: linear-gradient(180deg, #f0fdf4, var(--card) 120px) !important; margin-top: 12px; }
+.add-event h3 { color: #15803d; }
+.ae-grid { display: grid; grid-template-columns: 180px 1fr 220px; gap: 12px; }
+.ae-grid label { display: grid; gap: 4px; font-size: .82rem; font-weight: 600; color: var(--muted); }
+.ae-grid input, .ae-grid select { font: inherit; font-size: .95rem; padding: 8px 10px; border: 1px solid var(--line); border-radius: 9px; background: var(--card); color: var(--ink); }
+.ae-grid input:focus, .ae-grid select:focus { outline: 2px solid #16a34a; outline-offset: 1px; }
+.ae-btns { display: flex; gap: 8px; align-items: center; }
+@media (max-width: 720px) { .ae-grid { grid-template-columns: 1fr; } }
