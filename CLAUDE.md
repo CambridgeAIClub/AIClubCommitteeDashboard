@@ -26,4 +26,5 @@ When you need the site password, ask the user and pass it as `SITE_PASSWORD='…
 - Never commit or print the contents of `src/`, the storage token or the site password. Check `git status` shows no `src/` before committing.
 - After any change to `src/`, rebuild so `assets/secure.js` matches.
 - Keep the rota layout in data.json: row 0 headers (A month, B "Can't make it", C–H roles), row 1 role notes, row 2 "One of: …" requirements, then one row per event like "Dec (Dec 3)". Names are committee first names, comma-separated.
+- Team actions & guidelines: put year-long duties in `responsibilities`. Put action points for a single event or month in `items` as `{ text: "…", until: "YYYY-MM-DD" }` (usually the event date) so they disappear by themselves. Guideline cards about one event get `until` too. When the user adds action points, ask whether they are one-off if it isn't clear.
 - The Handover tab (`MAINT` in `src/data.js`) is the human-facing handover doc. Keep it in sync when the setup changes.
