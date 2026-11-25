@@ -863,3 +863,5 @@ table.rc .x-btn { font-size: .8rem; }
 .ae-grid input:focus, .ae-grid select:focus { outline: 2px solid #16a34a; outline-offset: 1px; }
 .ae-btns { display: flex; gap: 8px; align-items: center; }
 @media (max-width: 720px) { .ae-grid { grid-template-columns: 1fr; } }
+.guide-sync { border-top: 4px solid #16a34a !important; background: linear-gradient(180deg, #f0fdf4, var(--card) 140px) !important; }
+.guide-sync h3 { color: #15803d; }

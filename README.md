@@ -14,20 +14,28 @@ A one-page site for the Cambridge AI Club committee. It has these tabs:
 - **Next Meeting**: the next committee meeting, built from a when2meet snapshot. It shows the best times, who has replied and who hasn't, a heatmap and the live poll.
 - **Team actions** and **Guidelines**: each team's responsibilities and current action points, the goals for the year, and how we work.
 
-### How sign-up works (same approach as VolleySource)
+### How the Google Sheets sync works
 
-The rota lives on the website. People sign up, swap, withdraw and mark "can't make it" in the side panel, and changes save instantly. Nobody opens a spreadsheet.
+People sign up for the rota, change speaker owners and add new events on the website, and can still edit the Google Sheets directly. Both stay in sync.
 
-The data is a single `data.json` file in a **private GitHub repository**. The dashboard reads and writes it with a GitHub key, which is stored inside the encrypted site, so it can't be seen without the password. Every change is a commit with a readable message (e.g. "Daniel signed up: Dec · Lecture Host"), and is also added to a `log` list inside `data.json`. If two people save at the same moment, the dashboard retries automatically. Open pages refresh every minute.
+The **AI Club Rota** Google Sheet is the single source. A small Google Apps Script attached to it (`src/apps-script.gs`, deployed as a web app) does the work:
 
-One-time setup:
+- `read` returns the rota (the website shows it straight away; Google's public feed is the fallback).
+- `add` / `remove` put a name in or take it out of a rota cell.
+- `setOwner` changes the "Responsible" column (H) in the speaker tracker.
+- `addEvent` adds a new row, in date order, to both the rota sheet and the speaker tracker.
 
-1. On GitHub, create a **private** repository, e.g. `aiclub-rota-data`.
-2. Upload `src/data.json` to it (Add file → Upload files). This holds the current rota.
-3. Create a **fine-grained personal access token** (GitHub → Settings → Developer settings → Fine-grained tokens). Set **Repository access** to *Only select repositories*: that repo. Set **Permissions → Contents** to *Read and write*. Choose an expiry date and note it, because the token must be renewed before then.
-4. In `src/data.js`, set `store: { repo: "<you>/aiclub-rota-data", path: "data.json", token: "<token>" }`, then run `node build.mjs`.
+The script checks a secret key, saves one change at a time and lists every change in a **Dashboard log** tab. Its URL and key are in `src/data.js` → `SITE.sheetApi`, inside the encrypted site. Open pages refresh every minute.
 
-To change the year's events or the role requirements, edit `data.json` directly on GitHub, keeping the same layout. Until step 4 is done, the dashboard falls back to reading the old Google Sheet.
+Setting it up, or connecting a new sheet (the Handover tab on the site has the same steps with more detail):
+
+1. Make sure you can **edit** both the rota sheet and the speaker tracker.
+2. Update `src/apps-script.gs` if anything changed (sheet ID, tab ID, columns, committee names, `TOKEN`). `TOKEN` must match `SITE.sheetApi.token`.
+3. In the rota sheet: **Extensions → Apps Script**, replace the code with `src/apps-script.gs` (`pbcopy < src/apps-script.gs` copies it on a Mac) and save.
+4. **First time:** Deploy → New deployment → Web app, *Execute as: Me*, *Who has access: Anyone*, and approve the permissions. Put the Web app URL in `SITE.sheetApi.url`, then run `node build.mjs` and push.
+   **Update:** Deploy → Manage deployments → Edit → Version: *New version* → Deploy. The URL stays the same, so nothing on the website changes.
+
+The older GitHub storage (`SITE.store`, private repo `aiclub-rota-data`) is only used if `SITE.sheetApi.url` is empty.
 
 ## Password protection and the source code
 
@@ -46,7 +54,7 @@ The readable source (`src/`) isn't committed in plain text. An **encrypted copy,
 | Committee members, teams, emails | `src/data.js` → `COMMITTEE` |
 | Team action points | `src/data.js` → `TEAM_ACTIONS` |
 | Committee meeting poll | `src/data.js` → `MEETING` (when2meet snapshot) |
-| One-click sign-up | `src/data.js` → `SITE.signupApi` / `signupToken`; script in `src/apps-script.gs` |
+| Google Sheets sync (sign-ups, owners, new events) | `src/data.js` → `SITE.sheetApi`; script in `src/apps-script.gs` (paste into the rota sheet and redeploy) |
 | Guidelines | `src/data.js` → `GUIDELINES` |
 | Event themes, speakers, timings | `src/data.js` → `PROGRAMME.events` (keyed by date, e.g. `"2027-03-04"`) |
 | New academic year / new rota tab | `src/data.js` → `SITE.rotaGid`, `SITE.academicStartYear` (and ranges if the layout changes) |
