@@ -865,3 +865,6 @@ table.rc .x-btn { font-size: .8rem; }
 @media (max-width: 720px) { .ae-grid { grid-template-columns: 1fr; } }
 .guide-sync { border-top: 4px solid #16a34a !important; background: linear-gradient(180deg, #f0fdf4, var(--card) 140px) !important; }
 .guide-sync h3 { color: #15803d; }
+.ae-after { margin: 10px 0 4px; }
+.ae-after .add-btn { width: 100%; padding: 9px 12px; border-radius: 10px; }
+.ae-after .add-event { margin-top: 0; box-shadow: none; }
